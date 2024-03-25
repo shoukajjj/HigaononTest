@@ -13,13 +13,10 @@ const DictionaryApp = () => {
     { word: 'bəlbəl', pronounciation: "/'bəlbəl/",tagalog:'bulbol',english:'pubic hair' },
     { word: 'alima', pronounciation: "['Ɂalima]",tagalog:'kamay',english:'hand' },
     { word: 'tunlo', pronounciation: "[tunlo']",tagalog:'daliri',english:'finger' },
-
-
   ];
 
   const renderItem = ({ item }) => (
-    <View style={{ paddingLeft: 100,paddingRight:100,paddingTop:10,paddingBottom:10,borderWidth:1,
-    borderRadius:10,borderColor:'black',marginTop:10}}>
+    <View style={{ paddingLeft: 100,paddingRight:100,paddingTop:10,paddingBottom:10,marginTop:10}}>
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.word}</Text>
       <Text>{item.pronounciation}</Text>
       <Text>{item.tagalog}</Text>
