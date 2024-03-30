@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
-const DictionaryApp = ({ onWordClick }) => {
+const DictionaryApp = ({onWordClick}) => {
   
 const dictionaryData = [
   { word: 'tangila', pronounciation: "[taŋi'la]",tagalog:'tainga',english:'ear' },
@@ -14,11 +14,10 @@ const dictionaryData = [
   { word: 'alima', pronounciation: "['Ɂalima]",tagalog:'kamay',english:'hand' },
   { word: 'tunlo', pronounciation: "[tunlo']",tagalog:'daliri',english:'finger' },
 ];
+const handleWordClick = (word) => {
+  onWordClick(word); // Call the onWordClick function provided as a prop
+};
 
-  // const handleWordClick = (word) => {
-  //   onWordClick(word);
-  //   // You can perform other actions here when a word is clicked
-  // };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleWordClick(item.word)}>
