@@ -1,122 +1,9 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { StyleSheet, TextInput, View, Text, SafeAreaView, Button, ActivityIndicator, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import Icons from 'react-native-vector-icons/Feather';
-import { createTables, insertWord, getWords } from './db';
+import { createTables, insertWord, getWords } from './components/database';
+import Navigation from './components/nav/navigation';
 
-function HomeScreen() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [words, setWords] = useState([]);
-
-  useEffect(() => {
-    // Fetch words from the database on component mount
-    const fetchWords = async () => {
-      setLoading(true);
-      try {
-        const words = await getWords();
-        setWords(words);
-      } catch (error) {
-        console.error(error);
-      }
-      setLoading(false);
-    };
-
-    fetchWords();
-  }, []);
-
-  return (
-    <SafeAreaView>
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Search..."
-          clearButtonMode="always"
-          autoCapitalize="none"
-          onChangeText={setSearchQuery}
-          value={searchQuery}
-        />
-        <Button title="Search" onPress={() => console.log(searchQuery)} />
-        {loading ? (
-          <ActivityIndicator size="large" />
-        ) : (
-          <FlatList
-            data={words}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => <Text>{item.word}</Text>}
-          />
-        )}
-      </View>
-    </SafeAreaView>
-  );
-}
-
-function DictionaryPage({ navigation }) {
-  const handleWordClick = (word) => {
-    navigation.navigate('WordPage', { word });
-  };
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <DictionaryApp onWordClick={(word) => handleWordClick(word)} />
-      </View>
-    </View>
-  );
-}
-
-function WordPage({ route }) {
-  const { word } = route.params;
-  return (
-    <View>
-      <Text>{word}</Text>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function TabNavigator() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarLabel: ({ focused }) => {
-          let labelColor = focused ? '#212121' : '#868383';
-          let labelWeight = focused ? '900' : 'thin';
-
-          return (
-            <Text style={{ color: labelColor, fontSize: 16, fontWeight: labelWeight }}>
-              {route.name}
-            </Text>
-          );
-        },
-      })}
-    >
-      <Tab.Screen
-        name='Homepage'
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ size }) => (
-            <Icons name="home" color={'#707070'} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name='Dictionary'
-        component={DictionaryPage}
-        options={{
-          tabBarIcon: ({ size }) => (
-            <Icons name="book-open" color={'#707070'} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-}
 
 function App() {
   useEffect(() => {
@@ -139,13 +26,7 @@ function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name="Dictionary" component={DictionaryPage} />
-        <Stack.Screen name="WordPage" component={WordPage} options={{ title: 'Word' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Navigation/>
   );
 }
 
