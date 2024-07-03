@@ -13,7 +13,7 @@ const DictionaryApp = ({ onWordClick }) => {
     { word: 'bəlbəl', pronounciation: "/'bəlbəl/", tagalog: 'bulbol', english: 'pubic hair' },
     { word: 'alima', pronounciation: "['Ɂalima]", tagalog: 'kamay', english: 'hand' },
     { word: 'tunlo', pronounciation: "[tunlo']", tagalog: 'daliri', english: 'finger' },
-  ];
+  ];  
 
   const handleWordClick = (word) => {
     onWordClick(word); // Call the onWordClick function provided as a prop
