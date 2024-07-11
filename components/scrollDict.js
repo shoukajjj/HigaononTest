@@ -4,36 +4,35 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native
 const DictionaryApp = ({ onWordClick }) => {
 
   const dictionaryData = [
-    { word: 'tangila', pronounciation: "[taŋi'la]", tagalog: 'tainga', english: 'ear' },
-    { word: 'mata', pronounciation: "['mata]", tagalog: 'mata', english: 'eye' },
-    { word: 'kilay', pronounciation: "['kilaj]", tagalog: 'kilay', english: 'eyebrow' },
-    { word: 'ngipən', pronounciation: "/'ŋipən/", tagalog: 'ngipin', english: 'tooth' },
-    { word: 'lisən', pronounciation: "/'lisən/", tagalog: 'binti', english: 'leg' },
-    { word: 'buhok', pronounciation: "/bu'hok/", tagalog: 'buhok', english: 'hair' },
-    { word: 'bəlbəl', pronounciation: "/'bəlbəl/", tagalog: 'bulbol', english: 'pubic hair' },
-    { word: 'alima', pronounciation: "['Ɂalima]", tagalog: 'kamay', english: 'hand' },
-    { word: 'tunlo', pronounciation: "[tunlo']", tagalog: 'daliri', english: 'finger' },
+    { word: "taŋi'la", pronounciation: "[taŋi'la]", tagalog: 'tainga', english: 'ear' , sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko.",gerund:"Noun"},
+    { word: 'mata', pronounciation: "['mata]", tagalog: 'mata', english: 'eye', sentence1: "Ada'gi su mata nu.", sentence2: "Malaki ang mata mo." ,gerund:"Noun"},
+    { word: 'kilaj', pronounciation: "['kilaj]", tagalog: 'kilay', english: 'eyebrow', sentence1: "Maitəm su 'kilay nu.", sentence2: "Maitim ang kilay mo" ,gerund:"Noun"},
+    { word: 'ngipən', pronounciation: "/'ŋipən/", tagalog: 'ngipin', english: 'tooth', sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko." ,gerund:"Noun"},
+    { word: 'lisən', pronounciation: "/'lisən/", tagalog: 'binti', english: 'leg', sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko." ,gerund:"Noun"},
+    { word: 'buhok', pronounciation: "/bu'hok/", tagalog: 'buhok', english: 'hair', sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko." ,gerund:"Noun"},
+    { word: 'bəlbəl', pronounciation: "/'bəlbəl/", tagalog: 'bulbol', english: 'pubic hair', sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko." ,gerund:"Noun"},
+    { word: 'alima', pronounciation: "['Ɂalima]", tagalog: 'kamay', english: 'hand' , sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko.",gerund:"Noun"},
+    { word: 'tunlo', pronounciation: "[tunlo']", tagalog: 'daliri', english: 'finger', sentence1: "Ma'sakit su talikə'dan ku. ", sentence2: "Masakit ang likod ko." ,gerund:"Noun"},
   ];  
 
-  const handleWordClick = (word) => {
-    onWordClick(word); // Call the onWordClick function provided as a prop
+  const handleWordClick = (item) => {
+    onWordClick(item); 
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleWordClick(item.word)}>
+    <TouchableOpacity onPress={() => handleWordClick(item)}>
       <View style={styles.itemContainer}>
         <View style={styles.wordContainer}>
           <Text style={styles.word}>{item.word}</Text>
           <Text style={styles.pronunciation}>{item.pronounciation}</Text>
         </View>
         <View style={styles.translationContainer}>
-          <Text style={styles.translation}>Tagalog: {item.tagalog}</Text>
+          <Text style={styles.translation}>Filipino: {item.tagalog}</Text>
           <Text style={styles.translation}>English: {item.english}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
-  
 
   return (
     <View>
@@ -44,8 +43,8 @@ const DictionaryApp = ({ onWordClick }) => {
       />
     </View>
   );
+  
 };
-
 const styles = StyleSheet.create({
   itemContainer: {
     paddingLeft: 100,
@@ -77,5 +76,4 @@ const styles = StyleSheet.create({
     marginLeft: 0, // Add some spacing between translations
   },
 });
-
 export default DictionaryApp;

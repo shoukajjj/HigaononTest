@@ -1,7 +1,8 @@
 import * as React from 'react';
-import{ useState } from 'react';
+import{ useState,useEffect } from 'react';
 import { StyleSheet, TextInput, View , Text, SafeAreaView, ActivityIndicator, FlatList} from 'react-native';
 import DictionaryApp from './components/scrollDict';
+import WPage from './components/wordPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -28,23 +29,27 @@ function HomeScreen() {
 }
 
 function DictionaryPage({ navigation }) {
-  const handleWordClick = (word) => {
-    navigation.navigate('WordPage', { word});
+  const handleWordClick = (item) => {
+    navigation.navigate('WordPage', { item});
   };
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
-        <DictionaryApp onWordClick={(word) => handleWordClick(word)} />
+        <DictionaryApp onWordClick={(item) => handleWordClick(item)} />
       </View>
     </View>
   );
 }
 
 function WordPage({ route }) {
-  const { word } = route.params;
+  const { item } = route.params;
+  const sentence1 = item.sentence1;
+
   return (
-    <View>
-      <Text>{word}</Text>
+    <View style={styles.container}>
+      <View style={styles.nav}>
+        <WPage onWordClick={(item) => handleWordClick(item)} />
+      </View>
     </View>
   );
 }
@@ -78,9 +83,9 @@ function TabNavigator() {
           }}
         />
         <Tab.Screen 
-        name='Dictionary' 
-        component={DictionaryPage} 
-        options={{
+          name='Dictionary' 
+          component={DictionaryPage} 
+          options={{
             tabBarIcon: ({ size }) => (
               <Icons name="book-open" color={'#707070'} size={size} />
             ),}}/>
@@ -89,6 +94,24 @@ function TabNavigator() {
 }
 
 function App() {
+  
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time 
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#440d0f" />
+        <Text>Higaonon App is Loading</Text>
+      </View>
+    );
+  }
   return (
     <NavigationContainer>
     <Stack.Navigator>
@@ -97,7 +120,7 @@ function App() {
       }
       }/>
       <Stack.Screen name="Dictionary" component={DictionaryPage} />
-      <Stack.Screen name="WordPage" component={WordPage} options={{ title: 'Word' }} />
+      <Stack.Screen name="WordPage" component={WPage} options={{ title: 'Word' }} />
     </Stack.Navigator>
     </NavigationContainer>
   );
@@ -105,8 +128,6 @@ function App() {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: 'black',
     flex: 1,
     justifyContent: 'left',
     alignItems: 'center'
