@@ -1,50 +1,48 @@
-import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, TextInput,StyleSheet} from 'react-native';
+import { createTables} from './database';
+import preloadedData from '../assets/data.json';
+
+const Wordpage = () => {
+  const [error, setError] = useState(null);
+  const [words, setWords] = useState([]);
+  const [word, setWord] = useState('');
+  const [part_of_speech, setGerund] = useState('');
+  const [translation, setTranslation] = useState('');
+  const [definition, setDefinition] = useState('');
+  const [phonetic, setPhonetic] = useState('');
+  const [example, setExample] = useState('');
+  const [translationExample, setTranslationExample] = useState('');
+
+  useEffect(() => {
+    // Create tables but do not preload data
+    createTables()
+      .then(() => setWords(preloadedData))  // Directly set the words from JSON data
+      .catch(err => setError(err.message));
+  }, []);
 
 
-const WPage = ({ route }) => {
+  return (
+    <View>
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
 
-const {item} = route.params;
-return(
-      <View style= {styles.parentContainer}>
-        <View>
-          <Text>{item.gerund}</Text>
-          <Text style={styles.mainWord}>{item.word}</Text>
-          <Text>{item.pronounciation}</Text>
+      {words.map((word, index) => (
+        <View key={index}>
+          <Text>{word.word}</Text>
+          <Text>{word.part_of_speech}</Text>
+          <Text>{word.translation}</Text>
+          <Text>{word.definition}</Text>
+          <Text>{word.phonetic}</Text>
+          <Text>{word.example}</Text>
+          <Text>{word.translation_example}</Text>
         </View>
-        <View>
-          <Text>Filipino: {item.tagalog}</Text>
-          <Text>English: {item.english}</Text>
-          <Text>Higaonon Sentence: {item.sentence1}</Text>
-          <Text>Translated Sentence: {item.sentence2}</Text>
-        </View>
-      </View>
+      ))}
+    </View>
   );
-
-  
 };
-
 const styles = StyleSheet.create({
-    parentContainer: {
-      position: 'absolute',
-      left: 20, // paddingLeft corrected
-      right: 20, // paddingright corrected
-      top: '20%', // Adjust top positioning as needed
-      bottom: 0, // Adjust bottom positioning as needed
-      display: 'flex',
-      flexDirection: 'column'
-    
-    },
-    childContainer: {
-      position: 'relative',
-      // Optionally, you can add more styles here for childContainer
-    },
-    textStyle: {
-      // Add styles for textStyle if needed
-    },
-    mainWord:{
-        fontSize:80,
-        fontWeight:800
-    }
-  });
-export default WPage;
+  container: {
+
+  }
+})      
+export default Wordpage;

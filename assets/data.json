@@ -1,0 +1,21 @@
+[
+    {
+      "word": "hello",
+      "part_of_speech": "noun",
+      "translation": "hola",
+      "definition": "a greeting",
+      "phonetic": "həˈlō",
+      "example": "Hello, how are you?",
+      "translation_example": "Hola, ¿cómo estás?"
+    },
+    {
+      "word": "world",
+      "part_of_speech": "noun",
+      "translation": "mu",
+      "definition": "the earth, together with all of its countries and peoples",
+      "phonetic": "wərld",
+      "example": "The world is a beautiful place.",
+      "translation_example": "El mundo es un lugar hermoso."
+    }
+  ]
+  

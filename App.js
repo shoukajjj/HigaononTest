@@ -1,8 +1,7 @@
 import * as React from 'react';
 import{ useState,useEffect } from 'react';
 import { StyleSheet, TextInput, View , Text, SafeAreaView, ActivityIndicator, FlatList} from 'react-native';
-import DictionaryApp from './components/scrollDict';
-import WPage from './components/wordPage';
+import Wordpage from './components/wordPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -30,12 +29,12 @@ function HomeScreen() {
 
 function DictionaryPage({ navigation }) {
   const handleWordClick = (item) => {
-    navigation.navigate('WordPage', { item});
+    navigation.navigate('WordPage', {item});
   };
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
-        <DictionaryApp onWordClick={(item) => handleWordClick(item)} />
+        <Wordpage/>
       </View>
     </View>
   );
@@ -44,7 +43,7 @@ function DictionaryPage({ navigation }) {
 function WordPage({ route }) {
   const { item } = route.params;
   const sentence1 = item.sentence1;
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
@@ -120,7 +119,7 @@ function App() {
       }
       }/>
       <Stack.Screen name="Dictionary" component={DictionaryPage} />
-      <Stack.Screen name="WordPage" component={WPage} options={{ title: 'Word' }} />
+      <Stack.Screen name="WordPage" component={WordPage} options={{ title: 'Word' }} />
     </Stack.Navigator>
     </NavigationContainer>
   );
