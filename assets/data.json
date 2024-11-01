@@ -1,21 +1,130 @@
 [
-    {
-      "word": "hello",
-      "part_of_speech": "noun",
-      "translation": "hola",
-      "definition": "a greeting",
-      "phonetic": "həˈlō",
-      "example": "Hello, how are you?",
-      "translation_example": "Hola, ¿cómo estás?"
-    },
-    {
-      "word": "world",
-      "part_of_speech": "noun",
-      "translation": "mu",
-      "definition": "the earth, together with all of its countries and peoples",
-      "phonetic": "wərld",
-      "example": "The world is a beautiful place.",
-      "translation_example": "El mundo es un lugar hermoso."
-    }
-  ]
-  
+  {
+    "word": "buhuk",
+    "phonetic": "[bu'huk]",
+    "part_of_speech": "png",
+    "definition": "ito ay mga pinong hibla na tumutubo sa balat ng tao lalo na sa ulo",
+    "fil": "buhok",
+    "eng": "hair",
+    "bis": "buhuk",
+    "example": "Makəpal su buhuk ku.",
+    "translation_example": "‘Makapal ang buhok ko.’"
+  },
+  {
+    "word": "idung",
+    "phonetic": "['Ɂiduŋ]",
+    "part_of_speech": "png",
+    "definition": "ang bahagi ng katawan ng tao na ginagamit sa pang-amoy",
+    "fil": "ilong",
+    "eng": "nose",
+    "bis": "ilung",
+    "example": "Malangkaw su idung hu bata.",
+    "translation_example": "‘Matangos ang ilong ng bata.’"
+  },
+  {
+    "word": "lawa",
+    "phonetic": "['lawa]",
+    "part_of_speech": "png",
+    "definition": "pisikal na istruktura ng tao na kinabibilangan ng mga buto, laman at iba’t ibang organo",
+    "fil": "katawan",
+    "eng": "body",
+    "bis": "lawas"
+  },
+  {
+    "word": "mata",
+    "phonetic": "['mata]",
+    "part_of_speech": "png",
+    "definition": "bahagi ng katawan ng tao na ginagamit sa paningin",
+    "fil": "mata",
+    "eng": "eye",
+    "bis": "mata",
+    "example": "Ada'gi su mata nu.",
+    "translation_example": "‘Malaki ang mata mo.’"
+  },
+  {
+    "word": "ngipən",
+    "phonetic": "['ŋipən]",
+    "part_of_speech": "png",
+    "definition": "matigas at parang buto na bagay na ginagamit pangkagat o pangkain",
+    "fil": "ngipin",
+    "eng": "tooth",
+    "bis": "ngipun",
+    "example": "Huda ngipən hi Maria.",
+    "translation_example": "‘Walang ngipin si Maria.’"
+  },
+  {
+    "word": "pəka",
+    "phonetic": "[pə'ka]",
+    "part_of_speech": "png",
+    "definition": "butas na matatagpuan sa dulo ng bituka na nilalabasan ng dumi o tae mula sa katawan",
+    "fil": "puwit",
+    "eng": "anus",
+    "bis": "lubut"
+  },
+  {
+    "word": "talikədan",
+    "phonetic": "[talikə'dan]",
+    "part_of_speech": "png",
+    "definition": "kasalungat ng harapang bahagi ng katawan ng tao",
+    "fil": "likod",
+    "eng": "back of the body",
+    "bis": "likud",
+    "example": "Ma'sakit su talikə'dan ku.",
+    "translation_example": "‘Masakit ang likod ko.’"
+  },
+  {
+    "word": "tangila",
+    "phonetic": "[taŋi'la]",
+    "part_of_speech": "png",
+    "definition": "bahagi ng katawan ng tao na ginagamit sa pandinig",
+    "fil": "tainga",
+    "eng": "ear",
+    "bis": "dalunggan",
+    "example": "Mabuləd su tangi'la nu.",
+    "translation_example": "‘Malapad ang tainga mo.’"
+  },
+  {
+    "word": "tunlo",
+    "phonetic": "[tunlo']",
+    "part_of_speech": "png",
+    "definition": "",
+    "fil": "daliri",
+    "eng": "finger",
+    "bis": "tudlu",
+    "example": "Natampəd su tunlo din.",
+    "translation_example": "‘Naputol ang daliri niya.’"
+  },
+  {
+    "word": "balay",
+    "phonetic": "/'balaj/",
+    "part_of_speech": "png",
+    "definition": "istruktura na tinitirhan ng tao",
+    "fil": "bahay",
+    "eng": "house",
+    "bis": "balay",
+    "example": "Maatiyu su balay hu laga.",
+    "translation_example": "‘Maliit ang bahay ng dalaga.’"
+  },
+  {
+    "word": "hagudan",
+    "phonetic": "[hagu'dan]",
+    "part_of_speech": "png",
+    "definition": "bahagi ng bahay na inaakyatan",
+    "fil": "hagdan",
+    "eng": "stair",
+    "bis": "hagdan",
+    "example": "Mahugaw su hagudan hu balay.",
+    "translation_example": "‘Marumi ang hagdan ng bahay.’"
+  },
+  {
+    "word": "tukud",
+    "phonetic": "/'tukud/",
+    "part_of_speech": "png",
+    "definition": "poste ng bahay",
+    "fil": "haligi",
+    "eng": "pillar",
+    "bis": "haligi",
+    "example": "Ada'gi su tukud hu balay.",
+    "translation_example": "‘Malaki ang haligi ng bahay.’"
+  }
+]

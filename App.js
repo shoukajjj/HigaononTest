@@ -1,103 +1,92 @@
 import * as React from 'react';
-import{ useState,useEffect } from 'react';
-import { StyleSheet, TextInput, View , Text, SafeAreaView, ActivityIndicator, FlatList} from 'react-native';
-import Wordpage from './components/wordPage';
+import { useState, useEffect } from 'react';
+import { StyleSheet, TextInput, View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icons from 'react-native-vector-icons/Feather';
-import _ from "lodash";
+import Wordpage from './components/wordPage';
+import DetailsPage from './components/detailsPage';
 
+const HomeScreen = () => (
+  <SafeAreaView style={styles.safeArea}>
+    <View style={styles.searchContainer}>
+      <TextInput
+        style={styles.input}
+        placeholder="Search..."
+        clearButtonMode="always"
+        autoCapitalize='none'
+      />
+    </View>
+  </SafeAreaView>
+);
 
-
-function HomeScreen() {
-  return (
-    <SafeAreaView>
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Search..."
-          clearButtonMode="always"
-          autoCapitalize='none'
-          // onChangeText={handleSearch}
-          // value={searchQuery}
-        />
-      </View>
-    </SafeAreaView>
-  );
-}
-
-function DictionaryPage({ navigation }) {
+const DictionaryPage = ({ navigation }) => {
   const handleWordClick = (item) => {
-    navigation.navigate('WordPage', {item});
+    navigation.navigate('WordScreen', { item });
   };
-  return (
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <Wordpage/>
-      </View>
-    </View>
-  );
-}
 
-function WordPage({ route }) {
-  const { item } = route.params;
-  const sentence1 = item.sentence1;
-  
   return (
     <View style={styles.container}>
-      <View style={styles.nav}>
-        <WPage onWordClick={(item) => handleWordClick(item)} />
-      </View>
+      <Wordpage onWordClick={handleWordClick} />
     </View>
   );
-}
+};
+
+const WordScreen = ({ route }) => {
+  const { item } = route.params;
+
+  return (
+    <View style={styles.container}>
+      <DetailsPage route={route} />
+    </View>
+  );
+};
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function TabNavigator() {
-  return (
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarLabel: ({ focused }) => {
-            let labelColor = focused ? '#212121' : '#868383'; 
-            let labelWeight = focused ? '900' : 'thin';
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarLabel: ({ focused }) => {
+        let labelColor = focused ? '#212121' : '#868383';
+        let labelWeight = focused ? '900' : 'thin';
 
-            return (
-              <Text style={{ color: labelColor, fontSize: 16, fontWeight: labelWeight }}>
-                {route.name}
-              </Text>
-            );
-          },
-        })}
-            >
-        <Tab.Screen 
-          name='Homepage'
-          component={HomeScreen} 
-          options={{
-            tabBarIcon: ({ size }) => (
-              <Icons name="home" color={'#707070'} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen 
-          name='Dictionary' 
-          component={DictionaryPage} 
-          options={{
-            tabBarIcon: ({ size }) => (
-              <Icons name="book-open" color={'#707070'} size={size} />
-            ),}}/>
-      </Tab.Navigator>
-  );
-}
+        return (
+          <Text style={{ color: labelColor, fontSize: 16, fontWeight: labelWeight }}>
+            {route.name}
+          </Text>
+        );
+      },
+    })}
+  >
+    <Tab.Screen 
+      name='Homepage'
+      component={HomeScreen}
+      options={{
+        tabBarIcon: ({ size }) => (
+          <Icons name="home" color={'#707070'} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen 
+      name='Dictionary' 
+      component={DictionaryPage} 
+      options={{
+        tabBarIcon: ({ size }) => (
+          <Icons name="book-open" color={'#707070'} size={size} />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
 
-function App() {
-  
+const App = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time 
+    // Simulate loading time
     setTimeout(() => {
       setLoading(false);
     }, 3000); // 3 seconds
@@ -111,42 +100,49 @@ function App() {
       </View>
     );
   }
+
   return (
     <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={TabNavigator} options={{
-        headerShown:false
-      }
-      }/>
-      <Stack.Screen name="Dictionary" component={DictionaryPage} />
-      <Stack.Screen name="WordPage" component={WordPage} options={{ title: 'Word' }} />
-    </Stack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="DictionaryPage"
+          component={DictionaryPage}
+        />
+        <Stack.Screen
+          name="WordScreen"
+          component={WordScreen}
+          options={({ route }) => ({ title: route.params.item.word })}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: 'left',
-    alignItems: 'center'
   },
-  nav: {
-    width: '90%',
-    height: '100%'
-    // backgroundColor: 'red'
-  },
-  search: {
+  searchContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    height: '30%',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
   },
   input: {
     width: '70%',
-    backgroundColor: 'red',
-    borderRadius: 5,
-    paddingHorizontal: 15,
+    borderWidth:2,
+    borderColor:'#373A40',
+    backgroundColor: '#f0f0f0',
+    borderRadius: 20,
+    paddingHorizontal: 10,
     paddingVertical: 10,
   },
 });

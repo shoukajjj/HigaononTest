@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TextInput,StyleSheet} from 'react-native';
-import { createTables} from './database';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { createTables } from './database';
 import preloadedData from '../assets/data.json';
 
-const Wordpage = () => {
+const Wordpage = ({ onWordClick }) => {
   const [error, setError] = useState(null);
   const [words, setWords] = useState([]);
-  const [word, setWord] = useState('');
-  const [part_of_speech, setGerund] = useState('');
-  const [translation, setTranslation] = useState('');
-  const [definition, setDefinition] = useState('');
-  const [phonetic, setPhonetic] = useState('');
-  const [example, setExample] = useState('');
-  const [translationExample, setTranslationExample] = useState('');
 
   useEffect(() => {
     // Create tables but do not preload data
@@ -21,28 +14,58 @@ const Wordpage = () => {
       .catch(err => setError(err.message));
   }, []);
 
+  // const handleWordClick = (word) => {
+  //   navigation.navigate('DetailsPage', { word });
+  // };
 
   return (
-    <View>
+    <ScrollView>
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
 
       {words.map((word, index) => (
-        <View key={index}>
-          <Text>{word.word}</Text>
-          <Text>{word.part_of_speech}</Text>
-          <Text>{word.translation}</Text>
-          <Text>{word.definition}</Text>
-          <Text>{word.phonetic}</Text>
-          <Text>{word.example}</Text>
-          <Text>{word.translation_example}</Text>
-        </View>
+        <TouchableOpacity key={index} style={styles.bubble} onPress={() => onWordClick(word)}>
+          <Text style={styles.word}>{word.word} </Text>
+          <Text style={styles.phonetic}>{word.phonetic} </Text>
+          <Text style={styles.partOfSpeech}>{word.part_of_speech} {word.definition} </Text>
+          <Text> </Text>
+         
+          {/* <Text style={styles.translation}> Fi{word.fil} </Text>
+          <Text style={styles.definition}> {word.eng}</Text>
+          <Text style={styles.definition}> {word.bis}</Text> */}
+        </TouchableOpacity>
       ))}
-    </View>
+    </ScrollView>
   );
 };
+
 const styles = StyleSheet.create({
-  container: {
+  bubble: {
+    backgroundColor:'#e9d700',
+    borderRadius:'40',
+    borderWidth:1,
+    borderColor:'#373A40',
+    padding:15,
+    marginTop:10,
+    marginRight:20,
+    marginLeft:20,
+    marginBottom:10,
+    flexWrap:'wrap',
+    flexDirection:'row'
+  },
+  word: {
+    fontWeight:'800'
+
+  },
+  partOfSpeech:{
+    flexWrap:'wrap',
+    fontStyle:'italic'
 
   }
+
+  
 })      
+
+
+
+
 export default Wordpage;
